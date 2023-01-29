@@ -11,6 +11,23 @@ services:
       - postgres:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    
+  metabase:
+    image: metabase/metabase
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_HOST: postgres
+      MB_DB_PORT: 5432
+      MB_DB_DBNAME: db_name
+      MB_DB_USER: lappis
+      MB_DB_PASS: lappis
+    volumes:
+      - metabase:/metabase
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
 
 volumes:
   postgres:
+  metabase:
